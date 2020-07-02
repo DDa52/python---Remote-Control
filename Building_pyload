@@ -1,0 +1,32 @@
+import os
+import socket
+import time
+
+s = socket.socket()
+port = 2222
+time.sleep(5)
+host = "192.168.1.3"
+s.connect((host,port))
+print ("")
+print ("Good..! Connected To The Server Success.. ")
+print ("")
+#############
+while 1:
+    command = s.recv(1024)
+    command = command.decode()
+    print ("Done.. Command Recieved..!")
+    print ("")
+    if command == "v7x":
+        files = os.getcwd()
+        files = str(files)
+        s.send(files.encode())
+        print ("Done.. Command Executed..! ")
+    elif command == "ls":
+        files = os.getcwd()
+        files = str(files)
+        s.send(files.encode())
+        print ("Done.. Command Executed..! ")
+#############
+    else:
+        print ("")
+        print ("Ooh..! Command Err..!!")
